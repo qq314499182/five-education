@@ -19,24 +19,30 @@ public class EducationWeb {
     @Autowired
     private EducationService educationService;
 
-    @PostMapping(value = "/save")
+    @PostMapping(value = "save")
     public String save(Student student){
         return  educationService.save(student);
     }
 
-    @GetMapping(value = "/findAll")
+    @GetMapping(value = "findAll")
     public Page<Student> findAll(Pageable pageable){
         return educationService.findAll(pageable);
     }
 
-    @PostMapping(value = "/findSearch")
+    @PostMapping(value = "findSearch")
     public Page<Student> findSearch(@QuerydslPredicate(root = Student.class) Predicate predicate,Pageable pageable){
         return educationService.findSearch(predicate,pageable);
     }
 
-    @PostMapping(value = "/findHost")
+    @PostMapping(value = "findHost")
     public Page<Student> findHost(@PageableDefault(sort = {"id"},direction = Sort.Direction.DESC) Pageable pageable){
         return educationService.findHost(pageable);
+    }
+
+    @PostMapping(value = "updateHost")
+    public String updateHost(Student student){
+        return educationService.updateHost(student);
+
     }
 
 }

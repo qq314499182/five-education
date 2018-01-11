@@ -15,6 +15,16 @@ public class Student {
 
     private String sex;
 
+    private Integer host = 0;
+
+    public Integer getHost() {
+        return host;
+    }
+
+    public void setHost(Integer host) {
+        this.host = host;
+    }
+
     public Long getId() {
         return id;
     }

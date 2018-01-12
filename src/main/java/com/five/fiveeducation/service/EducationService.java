@@ -61,9 +61,9 @@ public class EducationService {
      * @return
      */
     public Page<Student> findHost(Pageable pageable) {
-        QStudent student = new QStudent("student");
-        Predicate  eq = student.startDate.after(new Date());
-        return educationDao.findAll(eq,pageable);
+        QStudent student = QStudent.student;
+        Predicate  predicate = student.startDate.after(new Date());
+        return educationDao.findAll(predicate,pageable);
     }
 
     /**

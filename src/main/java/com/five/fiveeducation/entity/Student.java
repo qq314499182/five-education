@@ -1,6 +1,7 @@
 package com.five.fiveeducation.entity;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "student")
@@ -16,6 +17,17 @@ public class Student {
     private String sex;
 
     private Integer host = 0;
+
+    @Temporal(TemporalType.DATE)
+    private Date startDate;
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
 
     public Integer getHost() {
         return host;

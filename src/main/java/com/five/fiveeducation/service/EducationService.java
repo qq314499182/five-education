@@ -1,12 +1,15 @@
 package com.five.fiveeducation.service;
 
 import com.five.fiveeducation.dao.EducationDao;
+import com.five.fiveeducation.entity.QStudent;
 import com.five.fiveeducation.entity.Student;
 import com.querydsl.core.types.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
 
 @Service
 public class EducationService {
@@ -58,7 +61,9 @@ public class EducationService {
      * @return
      */
     public Page<Student> findHost(Pageable pageable) {
-        return educationDao.findAll(pageable);
+        QStudent student = new QStudent("student");
+        Predicate  eq = student.startDate.after(new Date());
+        return educationDao.findAll(eq,pageable);
     }
 
     /**

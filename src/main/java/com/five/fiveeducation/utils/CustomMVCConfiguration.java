@@ -33,6 +33,6 @@ public class CustomMVCConfiguration extends WebMvcConfigurerAdapter {
     @Override
     public void configureContentNegotiation(
             ContentNegotiationConfigurer configurer) {
-        configurer.favorPathExtension(false);
+        configurer.favorPathExtension(true);
     }
 }

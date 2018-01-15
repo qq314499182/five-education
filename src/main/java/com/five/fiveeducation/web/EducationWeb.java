@@ -30,9 +30,9 @@ public class EducationWeb {
         return educationService.findAll(pageable).getContent();
     }
 
-    @PostMapping(value = "findSearch")
-    public List<Education> findSearch(@QuerydslPredicate(root = Education.class) Predicate predicate, Pageable pageable){
-        return educationService.findSearch(predicate,pageable).getContent();
+    @PostMapping(value = "findSearchOne")
+    public List<Education> findSearchOne(@QuerydslPredicate(root = Education.class) Predicate predicate, Pageable pageable){
+        return educationService.findSearchOne(predicate,pageable).getContent();
     }
 
     @PostMapping(value = "findHost")

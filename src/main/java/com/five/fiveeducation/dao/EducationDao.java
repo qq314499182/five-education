@@ -6,4 +6,5 @@ import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 
 
 public interface EducationDao extends JpaRepository<Education,Long>,QueryDslPredicateExecutor<Education> {
+
 }

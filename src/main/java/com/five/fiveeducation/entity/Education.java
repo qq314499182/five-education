@@ -80,7 +80,6 @@ public class Education {
     /**
      * 开始时间
      */
-    @Temporal(TemporalType.DATE)
     private Date startDate;
 
     /**
@@ -97,6 +96,36 @@ public class Education {
      * 竞价
      */
     private Integer auction;
+
+    /**
+     * 是否显示
+     *  0 显示
+     *  1 隐藏
+     */
+    private Integer isShow = 0;
+
+    /**
+     * 过期
+     * 0 未过期
+     * 1 过期
+     */
+    private Integer overdue = 0;
+
+    public Integer getOverdue() {
+        return overdue;
+    }
+
+    public void setOverdue(Integer overdue) {
+        this.overdue = overdue;
+    }
+
+    public Integer getIsShow() {
+        return isShow;
+    }
+
+    public void setIsShow(Integer isShow) {
+        this.isShow = isShow;
+    }
 
     public Integer getTrainType() {
         return trainType;

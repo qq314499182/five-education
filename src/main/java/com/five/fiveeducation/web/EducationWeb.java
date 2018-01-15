@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController()
 public class EducationWeb {
@@ -21,18 +22,18 @@ public class EducationWeb {
     private EducationService educationService;
 
     @PostMapping(value = "save")
-    public String save(Education education){
+    public Map<String,String> save(Education education){
         return  educationService.save(education);
     }
 
     @GetMapping(value = "findAll")
-    public List<Education> findAll(Pageable pageable){
-        return educationService.findAll(pageable).getContent();
+    public List<Education> findAll(@QuerydslPredicate(root = Education.class) Predicate predicate, Pageable pageable){
+        return educationService.findAll(predicate,pageable).getContent();
     }
 
     @PostMapping(value = "findSearchOne")
-    public List<Education> findSearchOne(@QuerydslPredicate(root = Education.class) Predicate predicate, Pageable pageable){
-        return educationService.findSearchOne(predicate,pageable).getContent();
+    public List<Education> findSearchOne(Education education, Pageable pageable){
+        return educationService.findSearchOne(education,pageable).getContent();
     }
 
     @PostMapping(value = "findHost")

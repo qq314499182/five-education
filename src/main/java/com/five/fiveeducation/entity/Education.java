@@ -83,6 +83,17 @@ public class Education {
     private Date startDate;
 
     /**
+     * 开始时间至今
+     * 1 -- 15天以内
+     * 2 -- 15-30天
+     * 3 -- 30-45天
+     * 4 -- 45-90天
+     * 5 -- 90-180天
+     * 6 -- 全年
+     */
+    private Integer stratDateSearch;
+
+    /**
      * 是否免费
      */
     private Integer isFree;
@@ -110,6 +121,15 @@ public class Education {
      * 1 过期
      */
     private Integer overdue = 0;
+
+
+    public Integer getStratDateSearch() {
+        return stratDateSearch;
+    }
+
+    public void setStratDateSearch(Integer stratDateSearch) {
+        this.stratDateSearch = stratDateSearch;
+    }
 
     public Integer getOverdue() {
         return overdue;

@@ -2,6 +2,7 @@ package com.five.fiveeducation.service;
 
 import com.five.fiveeducation.dao.EducationDao;
 import com.five.fiveeducation.entity.Education;
+import com.five.fiveeducation.entity.EducationSearch;
 import com.five.fiveeducation.entity.QEducation;
 import com.five.fiveeducation.utils.DateUtils;
 import com.querydsl.core.types.Predicate;
@@ -13,13 +14,14 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
 public class EducationService {
 
     @Autowired
-    private EducationDao educationDao;
+    private  EducationDao educationDao;
 
     /**
      * 保存
@@ -29,8 +31,10 @@ public class EducationService {
      */
     public Map<String,String> save(Education education) {
         Map<String,String> map = new HashMap<>();
-        //根据费用判断价格区间
-        Education  result = updatePriceInterval(education);
+        //根据费用更新价格区间
+        Education result = updatePriceInterval(education);
+        //根据持续时间更新持续时间区间
+        result = updateDaysInterval(result);
         try {
             result = educationDao.saveAndFlush(result);
         } catch (Exception e) {
@@ -65,7 +69,7 @@ public class EducationService {
      * @param pageable
      * @return
      */
-    public Page<Education> findSearchOne(Education education, Pageable pageable) {
+    public Page<Education> findSearch(EducationSearch education, Pageable pageable) {
         //拼接查询条件
         Predicate predicate = creatPredicate(education);
         return educationDao.findAll(predicate, pageable);
@@ -105,10 +109,13 @@ public class EducationService {
         }
     }
 
-
+    /**
+     * 更新价格区间
+     * @param education
+     * @return
+     */
     private Education updatePriceInterval(Education education){
         if (education != null) {
-            //判断价位区间
             Integer expenses = education.getExpenses();
             if (expenses != null){
                 if (expenses < 1000) {
@@ -132,61 +139,81 @@ public class EducationService {
     }
 
     /**
-     * 拼接查询条件（单选模式）
+     * 更新持续时间区间
+     * @param education
+     * @return
+     */
+    private Education updateDaysInterval(Education education){
+        if (education != null){
+            if(education.getDays() < 1){
+                education.setDaysInterval("半天");
+            }
+            if (education.getDays() == 1){
+                education.setDaysInterval("1天");
+            }
+            if (education.getDays() == 2){
+                education.setDaysInterval("2天");
+            }
+            if (education.getDays() >= 3){
+                education.setDaysInterval("3天及以上");
+            }
+        }
+        return education;
+    }
+
+    /**
+     * 拼接查询条件
      * @param education
      * @return Predicate
      */
-    private Predicate creatPredicate(Education education){
+    private Predicate creatPredicate(EducationSearch education){
         QEducation Qeducation = QEducation.education;
         BooleanExpression expression = Qeducation.isShow.eq(0);
         expression =  expression.and(Qeducation.overdue.eq(0));
         //培训类型
         if (education.getTrainType() != null){
-            expression = expression.and(Qeducation.trainType.eq(education.getTrainType()));
+            expression = expression.and(Qeducation.trainType.in(education.getTrainType()));
         }
         //培训主题
         if (education.getTrainSubject() != null){
-            expression = expression.and(Qeducation.trainSubject.eq(education.getTrainSubject()));
+            expression = expression.and(Qeducation.trainSubject.in(education.getTrainSubject()));
         }
         //国家
         if (education.getCountry() != null){
-            expression = expression.and(Qeducation.country.eq(education.getCountry()));
+            expression = expression.and(Qeducation.country.in(education.getCountry()));
         }
         //地区
         if (education.getRegion() != null){
-            expression = expression.and(Qeducation.region.eq(education.getRegion()));
+            expression = expression.and(Qeducation.region.in(education.getRegion()));
         }
         //开始日期距今
         Integer stratDateSearch = education.getStratDateSearch();
+        Date date = new Date();
         if (stratDateSearch != null){
             // 15天以内
             if (stratDateSearch == 1){
                 Date date15 = DateUtils.getDateFromSourceDate(new Date(), 15);
                 expression =  expression.and(Qeducation.startDate.between(new Date(),date15));
             }
-            //15-30天
+            //30天以内
             if (stratDateSearch == 2){
-                Date date15 = DateUtils.getDateFromSourceDate(new Date(), 15);
-                Date date30 = DateUtils.getDateFromSourceDate(new Date(), 30);
-                expression = expression.and(Qeducation.startDate.between(date15,date30));
+                Date date30 = DateUtils.getDateFromSourceDate(date, 30);
+                expression = expression.and(Qeducation.startDate.between(date,date30));
             }
-            //30-45天
+            //60天以内
             if (stratDateSearch == 3){
-                Date date30 = DateUtils.getDateFromSourceDate(new Date(), 30);
-                Date date45 = DateUtils.getDateFromSourceDate(new Date(), 45);
-                expression = expression.and(Qeducation.startDate.between(date30,date45));
+                Date date45 = DateUtils.getDateFromSourceDate(new Date(), 60);
+                expression = expression.and(Qeducation.startDate.between(date,date45));
             }
-            //45-90天
+            //90天以内
             if (stratDateSearch == 4){
-                Date date45 = DateUtils.getDateFromSourceDate(new Date(), 45);
                 Date date90 = DateUtils.getDateFromSourceDate(new Date(), 90);
-                expression = expression.and(Qeducation.startDate.between(date45,date90));
+                expression = expression.and(Qeducation.startDate.between(date,date90));
             }
-            //90-180天
+            //180天以内
             if (stratDateSearch == 5){
-                Date date90 = DateUtils.getDateFromSourceDate(new Date(), 90);
                 Date date180 = DateUtils.getDateFromSourceDate(new Date(), 180);
-                expression = expression.and(Qeducation.startDate.between(date90,date180));
+                expression = expression.and(Qeducation.startDate.between(date,date180));
             }
             //全年
             if (stratDateSearch == 6){
@@ -194,8 +221,31 @@ public class EducationService {
                 expression = expression.and(Qeducation.startDate.after(date180));
             }
         }
-
-
+        //持续时间
+        List<String> daysInterval = education.getDaysInterval();
+        if(daysInterval != null){
+            expression.and(Qeducation.daysInterval.in(daysInterval));
+        }
+        //是否免费
+        Integer isFree = education.getIsFree();
+        if (isFree != null){
+            expression.and(Qeducation.isFree.eq(isFree));
+        }
+        //价格区间
+        List<String> priceInterval = education.getPriceInterval();
+        if (priceInterval != null){
+            expression.and(Qeducation.priceInterval.in(priceInterval));
+        }
+        //主办方
+        List<String> sponsor = education.getSponsor();
+        if (sponsor != null){
+            expression.and(Qeducation.sponsor.in(sponsor));
+        }
+        //讲师信息
+        List<String> lectuer = education.getLectuer();
+        if (lectuer != null){
+            expression.and(Qeducation.lectuer.in(lectuer));
+        }
 
         return expression;
     }

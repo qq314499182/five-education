@@ -1,6 +1,7 @@
 package com.five.fiveeducation.web;
 
 import com.five.fiveeducation.entity.Education;
+import com.five.fiveeducation.entity.EducationSearch;
 import com.five.fiveeducation.service.EducationService;
 import com.querydsl.core.types.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +32,9 @@ public class EducationWeb {
         return educationService.findAll(predicate,pageable).getContent();
     }
 
-    @PostMapping(value = "findSearchOne")
-    public List<Education> findSearchOne(Education education, Pageable pageable){
-        return educationService.findSearchOne(education,pageable).getContent();
+    @PostMapping(value = "findSearch")
+    public List<Education> findSearchOne(EducationSearch education, Pageable pageable){
+        return educationService.findSearch(education,pageable).getContent();
     }
 
     @PostMapping(value = "findHost")

@@ -13,7 +13,7 @@ public class EducationSearch {
     /**
      * 培训主题
      */
-    private List<Integer> trainSubject;
+    private List<String> trainSubject;
 
     /**
      * 国家
@@ -33,7 +33,7 @@ public class EducationSearch {
     /**
      * 持续区间
      */
-    private List<Integer> daysInterval;
+    private List<String> daysInterval;
 
     /**
      * 是否收费
@@ -44,7 +44,60 @@ public class EducationSearch {
      * 费用区间
      *
      */
-    private List<Integer> expensesInterval;
+    private List<String> priceInterval;
+
+    /**
+     * 开始时间至今
+     * 1 -- 15天以内
+     * 2 -- 30天以内
+     * 3 -- 60天以内
+     * 4 -- 90天以内
+     * 5 -- 180天以内
+     * 6 -- 全年
+     */
+    private Integer stratDateSearch;
+
+    /**
+     * 主办方
+     */
+    private List<String> sponsor;
+
+    /**
+     * 讲师信息
+     */
+    private List<String> lectuer;
+
+    public List<String> getSponsor() {
+        return sponsor;
+    }
+
+    public void setSponsor(List<String> sponsor) {
+        this.sponsor = sponsor;
+    }
+
+    public List<String> getLectuer() {
+        return lectuer;
+    }
+
+    public void setLectuer(List<String> lectuer) {
+        this.lectuer = lectuer;
+    }
+
+    public List<String> getPriceInterval() {
+        return priceInterval;
+    }
+
+    public void setPriceInterval(List<String> priceInterval) {
+        this.priceInterval = priceInterval;
+    }
+
+    public Integer getStratDateSearch() {
+        return stratDateSearch;
+    }
+
+    public void setStratDateSearch(Integer stratDateSearch) {
+        this.stratDateSearch = stratDateSearch;
+    }
 
     public List<Integer> getTrainType() {
         return trainType;
@@ -54,11 +107,11 @@ public class EducationSearch {
         this.trainType = trainType;
     }
 
-    public List<Integer> getTrainSubject() {
+    public List<String> getTrainSubject() {
         return trainSubject;
     }
 
-    public void setTrainSubject(List<Integer> trainSubject) {
+    public void setTrainSubject(List<String> trainSubject) {
         this.trainSubject = trainSubject;
     }
 
@@ -86,11 +139,11 @@ public class EducationSearch {
         this.startDateInterval = startDateInterval;
     }
 
-    public List<Integer> getDaysInterval() {
+    public List<String> getDaysInterval() {
         return daysInterval;
     }
 
-    public void setDaysInterval(List<Integer> daysInterval) {
+    public void setDaysInterval(List<String> daysInterval) {
         this.daysInterval = daysInterval;
     }
 
@@ -102,11 +155,4 @@ public class EducationSearch {
         this.isFree = isFree;
     }
 
-    public List<Integer> getExpensesInterval() {
-        return expensesInterval;
-    }
-
-    public void setExpensesInterval(List<Integer> expensesInterval) {
-        this.expensesInterval = expensesInterval;
-    }
 }

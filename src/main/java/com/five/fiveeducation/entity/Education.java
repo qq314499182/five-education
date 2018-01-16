@@ -58,6 +58,11 @@ public class Education {
     private Integer days;
 
     /**
+     * 持续时间区间
+     */
+    private String daysInterval;
+
+    /**
      * 国内外
      */
     private Integer country;
@@ -122,6 +127,14 @@ public class Education {
      */
     private Integer overdue = 0;
 
+
+    public String getDaysInterval() {
+        return daysInterval;
+    }
+
+    public void setDaysInterval(String daysInterval) {
+        this.daysInterval = daysInterval;
+    }
 
     public Integer getStratDateSearch() {
         return stratDateSearch;

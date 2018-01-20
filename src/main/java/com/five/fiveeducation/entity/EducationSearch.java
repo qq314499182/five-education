@@ -6,9 +6,9 @@ import java.util.List;
 public class EducationSearch {
 
     /**
-     * 培训l类型
+     * 培训类型
      */
-    private List<Integer> trainType;
+    private List<String> trainType;
 
     /**
      * 培训主题
@@ -99,11 +99,11 @@ public class EducationSearch {
         this.stratDateSearch = stratDateSearch;
     }
 
-    public List<Integer> getTrainType() {
+    public List<String> getTrainType() {
         return trainType;
     }
 
-    public void setTrainType(List<Integer> trainType) {
+    public void setTrainType(List<String> trainType) {
         this.trainType = trainType;
     }
 

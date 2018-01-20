@@ -14,7 +14,7 @@ public class Education {
     /**
      * 培训类型
      */
-    private Integer trainType;
+    private String trainType;
 
     /**
      * 培训主题
@@ -90,10 +90,10 @@ public class Education {
     /**
      * 开始时间至今
      * 1 -- 15天以内
-     * 2 -- 15-30天
-     * 3 -- 30-45天
-     * 4 -- 45-90天
-     * 5 -- 90-180天
+     * 2 -- 30天以内
+     * 3 -- 60天以内
+     * 4 -- 90天以内
+     * 5 -- 180天以内
      * 6 -- 全年
      */
     private Integer stratDateSearch;
@@ -160,11 +160,11 @@ public class Education {
         this.isShow = isShow;
     }
 
-    public Integer getTrainType() {
+    public String getTrainType() {
         return trainType;
     }
 
-    public void setTrainType(Integer trainType) {
+    public void setTrainType(String trainType) {
         this.trainType = trainType;
     }
 

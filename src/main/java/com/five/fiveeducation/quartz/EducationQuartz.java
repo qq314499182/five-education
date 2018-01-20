@@ -26,10 +26,12 @@ public class EducationQuartz {
         QEducation Qeducation = QEducation.education;
         Predicate predicate = Qeducation.startDate.before(new Date());
         Iterable<Education> educations = educationDao.findAll(predicate);
-        for (Education education : educations) {
-            education.setOverdue(1);
+        if (educations != null){
+            for (Education education : educations) {
+                education.setOverdue(1);
+            }
+            educationDao.save(educations);
+            System.out.println("定时任务执行，数据状态改变");
         }
-        educationDao.save(educations);
-        System.out.println("定时任务执行，数据状态改变");
     }
 }

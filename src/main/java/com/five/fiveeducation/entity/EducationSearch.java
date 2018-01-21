@@ -11,6 +11,11 @@ public class EducationSearch {
     private List<String> trainType;
 
     /**
+     * 培训类型模糊查询
+     */
+    private String trainTypeLike;
+
+    /**
      * 培训主题
      */
     private List<String> trainSubject;
@@ -18,17 +23,17 @@ public class EducationSearch {
     /**
      * 国家
      */
-    private List<Integer> country;
+    private List<String> country;
 
     /**
      * 地区
      */
-    private List<Integer>region;
+    private List<String>region;
 
     /**
      * 开始时间区间
      */
-    private List<Integer> startDateInterval;
+    private List<String> startDateInterval;
 
     /**
      * 持续区间
@@ -66,6 +71,14 @@ public class EducationSearch {
      * 讲师信息
      */
     private List<String> lectuer;
+
+    public String getTrainTypeLike() {
+        return trainTypeLike;
+    }
+
+    public void setTrainTypeLike(String trainTypeLike) {
+        this.trainTypeLike = trainTypeLike;
+    }
 
     public List<String> getSponsor() {
         return sponsor;
@@ -115,27 +128,27 @@ public class EducationSearch {
         this.trainSubject = trainSubject;
     }
 
-    public List<Integer> getCountry() {
+    public List<String> getCountry() {
         return country;
     }
 
-    public void setCountry(List<Integer> country) {
+    public void setCountry(List<String> country) {
         this.country = country;
     }
 
-    public List<Integer> getRegion() {
+    public List<String> getRegion() {
         return region;
     }
 
-    public void setRegion(List<Integer> region) {
+    public void setRegion(List<String> region) {
         this.region = region;
     }
 
-    public List<Integer> getStartDateInterval() {
+    public List<String> getStartDateInterval() {
         return startDateInterval;
     }
 
-    public void setStartDateInterval(List<Integer> startDateInterval) {
+    public void setStartDateInterval(List<String> startDateInterval) {
         this.startDateInterval = startDateInterval;
     }
 

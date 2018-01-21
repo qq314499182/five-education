@@ -1,32 +1,40 @@
 package com.five.fiveeducation.web;
 
+import com.five.fiveeducation.entity.Photo;
 import com.five.fiveeducation.service.PhotoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.util.List;
+import java.util.Map;
 
-@RestController
+@RestController()
 public class PhotoWeb {
 
     @Autowired
     private PhotoService photoService;
 
-    @GetMapping("upload")
-    public String upload(MultipartFile file,HttpServletRequest request){
-        String photeUrl = photoService.upload(file,request);
-
-
-        return null;
-
+    @PostMapping("/photo-upload")
+    public Map<String, String> upload(HttpServletRequest request){
+        return photoService.upload(request);
     }
 
+    @GetMapping("/photo-findAll")
+    public List<Photo> findAll(){
+        return photoService.findAll();
+    }
 
+    @PostMapping("/photo-delete")
+    public Map<String, String> delete(Photo photo){
+        return photoService.delete(photo);
+    }
 
+    @PostMapping("/photo-update")
+    public Map<String,String> update(Photo photo){
+        return photoService.update(photo);
+    }
 
 }

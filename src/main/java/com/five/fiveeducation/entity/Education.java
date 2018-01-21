@@ -65,12 +65,12 @@ public class Education {
     /**
      * 国内外
      */
-    private Integer country;
+    private String country;
 
     /**
      * 地区
      */
-    private Integer region;
+    private String region;
 
     /**
      * 热度
@@ -232,19 +232,19 @@ public class Education {
         this.days = days;
     }
 
-    public Integer getCountry() {
+    public String getCountry() {
         return country;
     }
 
-    public void setCountry(Integer country) {
+    public void setCountry(String country) {
         this.country = country;
     }
 
-    public Integer getRegion() {
+    public String getRegion() {
         return region;
     }
 
-    public void setRegion(Integer region) {
+    public void setRegion(String region) {
         this.region = region;
     }
 

@@ -174,6 +174,10 @@ public class EducationService {
         if (education.getTrainType() != null){
             expression = expression.and(Qeducation.trainType.in(education.getTrainType()));
         }
+        //培训类型模糊查询
+        if(education.getTrainTypeLike() != null){
+            expression = expression.and(Qeducation.trainType.like("%"+education.getTrainTypeLike()+"%"));
+        }
         //培训主题
         if (education.getTrainSubject() != null){
             expression = expression.and(Qeducation.trainSubject.in(education.getTrainSubject()));

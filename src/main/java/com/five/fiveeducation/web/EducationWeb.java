@@ -48,4 +48,14 @@ public class EducationWeb {
 
     }
 
+    @PostMapping(value = "updateEnrollCount")
+    public Map<String,String> updateEnrollCount(Education education){
+        return educationService.updateEnrollCount(education);
+    }
+
+    @PostMapping(value = "updateClickCount")
+    public Map<String,String> updateClickCount(Education education){
+        return educationService.updateClickCount(education);
+    }
+
 }

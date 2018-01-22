@@ -127,6 +127,33 @@ public class Education {
      */
     private Integer overdue = 0;
 
+    /**
+     * 报名数
+     */
+    private Integer enrollCount = 0;
+
+
+    /**
+     * 点击外部连接数
+     */
+    private Integer clickCount = 0;
+
+
+    public Integer getEnrollCount() {
+        return enrollCount;
+    }
+
+    public void setEnrollCount(Integer enrollCount) {
+        this.enrollCount = enrollCount;
+    }
+
+    public Integer getClickCount() {
+        return clickCount;
+    }
+
+    public void setClickCount(Integer clickCount) {
+        this.clickCount = clickCount;
+    }
 
     public String getDaysInterval() {
         return daysInterval;

@@ -17,22 +17,22 @@ public class PhotoWeb {
     @Autowired
     private PhotoService photoService;
 
-    @PostMapping("/photo-upload")
+    @PostMapping("photo-upload")
     public Map<String, String> upload(HttpServletRequest request){
         return photoService.upload(request);
     }
 
-    @GetMapping("/photo-findAll")
+    @GetMapping("photo-findAll")
     public List<Photo> findAll(){
         return photoService.findAll();
     }
 
-    @PostMapping("/photo-delete")
+    @PostMapping("photo-delete")
     public Map<String, String> delete(Photo photo){
         return photoService.delete(photo);
     }
 
-    @PostMapping("/photo-update")
+    @PostMapping("photo-update")
     public Map<String,String> update(Photo photo){
         return photoService.update(photo);
     }

@@ -40,6 +40,11 @@ public class ManageService {
      */
     public Map<String,String> update(Manage manage) {
         Map<String,String> map = new HashMap<>();
+        if (manage.getId() == null ){
+            map.put("state","500");
+            map.put("message","参数没有主键");
+            return map;
+        }
         try {
             Manage save = manageDao.save(manage);
             if (save == null){

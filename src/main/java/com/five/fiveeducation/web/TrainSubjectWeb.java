@@ -3,6 +3,7 @@ package com.five.fiveeducation.web;
 import com.five.fiveeducation.entity.TrainSubject;
 import com.five.fiveeducation.service.TrainSubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,7 +16,7 @@ public class TrainSubjectWeb {
     @Autowired
     private TrainSubjectService trainSubjectService;
 
-    @PostMapping("train-subject-findAll")
+    @GetMapping("train-subject-findAll")
     public List<TrainSubject> findAll(){
         return trainSubjectService.findAll();
     }

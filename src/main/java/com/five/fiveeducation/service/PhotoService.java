@@ -76,7 +76,7 @@ public class PhotoService {
             return map;
         } else {
             map.put("state", "200");
-            map.put("message", "数据保存成功");
+            map.put("message", "图片上传成功");
             return map;
         }
     }

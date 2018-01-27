@@ -1,6 +1,7 @@
 package com.five.fiveeducation.service;
 
-import com.five.fiveeducation.dao.TrainSubjectDao;
+import com.five.fiveeducation.dao.LectuerDao;
+import com.five.fiveeducation.entity.Lectuer;
 import com.five.fiveeducation.entity.TrainSubject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,19 +11,19 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class TrainSubjectService {
+public class LectuerService {
 
     @Autowired
-    private TrainSubjectDao trainSubjectMeunDao;
+    private LectuerDao lectuerDao;
 
-    public List<TrainSubject> findAll() {
-        return trainSubjectMeunDao.findAll();
+    public List<Lectuer> findAll() {
+        return lectuerDao.findAll();
     }
 
-    public Map<String,String> save(TrainSubject trainSubject) {
+    public Map<String,String> save(Lectuer lectuer) {
         Map<String,String> map = new HashMap<>();
         try {
-            TrainSubject save = trainSubjectMeunDao.save(trainSubject);
+            Lectuer save = lectuerDao.saveAndFlush(lectuer);
             if (save == null){
                 map.put("state","500");
                 map.put("message","保存失败,数据库返回结果null");
@@ -38,10 +39,10 @@ public class TrainSubjectService {
         return map;
     }
 
-    public Map<String,String> update(TrainSubject trainSubject) {
+    public Map<String,String> update(Lectuer lectuer) {
         Map<String,String> map = new HashMap<>();
         try {
-            TrainSubject save = trainSubjectMeunDao.save(trainSubject);
+            Lectuer save = lectuerDao.saveAndFlush(lectuer);
             if (save == null){
                 map.put("state","500");
                 map.put("message","更新失败,数据库返回结果null");
@@ -57,10 +58,10 @@ public class TrainSubjectService {
         return map;
     }
 
-    public Map<String,String> delete(TrainSubject trainSubject) {
+    public Map<String,String> delete(Lectuer lectuer) {
         Map<String,String> map = new HashMap<>();
         try {
-            trainSubjectMeunDao.delete(trainSubject);
+            lectuerDao.delete(lectuer);
         } catch (Exception e) {
             map.put("state","500");
             map.put("message",e.getMessage());

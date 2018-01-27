@@ -238,28 +238,28 @@ public class EducationService {
         }
         //持续时间
         List<String> daysInterval = education.getDaysInterval();
-        if (daysInterval != null) {
-            expression.and(Qeducation.daysInterval.in(daysInterval));
+            if (daysInterval != null) {
+                expression = expression.and(Qeducation.daysInterval.in(daysInterval));
         }
         //是否免费
         Integer isFree = education.getIsFree();
         if (isFree != null) {
-            expression.and(Qeducation.isFree.eq(isFree));
+            expression = expression.and(Qeducation.isFree.eq(isFree));
         }
         //价格区间
         List<String> priceInterval = education.getPriceInterval();
         if (priceInterval != null) {
-            expression.and(Qeducation.priceInterval.in(priceInterval));
+            expression = expression.and(Qeducation.priceInterval.in(priceInterval));
         }
         //主办方
         List<String> sponsor = education.getSponsor();
         if (sponsor != null) {
-            expression.and(Qeducation.sponsor.in(sponsor));
+            expression = expression.and(Qeducation.sponsor.in(sponsor));
         }
         //讲师信息
         List<String> lectuer = education.getLectuer();
         if (lectuer != null) {
-            expression.and(Qeducation.lectuer.in(lectuer));
+            expression = expression.and(Qeducation.lectuer.in(lectuer));
         }
 
         return expression;

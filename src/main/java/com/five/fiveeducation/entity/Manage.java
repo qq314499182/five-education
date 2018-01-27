@@ -13,21 +13,6 @@ public class Manage {
     private Long id;
 
     /**
-     * 管理培训主题搜索  0 显示 1隐藏
-     */
-    private Integer trainSubject = 0;
-
-    /**
-     * 机构名称搜索 0 显示 1隐藏
-     */
-    private Integer sponsor = 0;
-
-    /**
-     * 讲师信息搜索 0显示 1隐藏
-     */
-    private Integer lectuer = 0;
-
-    /**
      * 累计搜索数
      */
     private Long searchCount = 0L;
@@ -43,30 +28,6 @@ public class Manage {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Integer getTrainSubject() {
-        return trainSubject;
-    }
-
-    public void setTrainSubject(Integer trainSubject) {
-        this.trainSubject = trainSubject;
-    }
-
-    public Integer getSponsor() {
-        return sponsor;
-    }
-
-    public void setSponsor(Integer sponsor) {
-        this.sponsor = sponsor;
-    }
-
-    public Integer getLectuer() {
-        return lectuer;
-    }
-
-    public void setLectuer(Integer lectuer) {
-        this.lectuer = lectuer;
     }
 
     public Long getSearchCount() {

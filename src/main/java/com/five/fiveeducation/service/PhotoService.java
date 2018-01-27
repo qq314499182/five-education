@@ -40,8 +40,10 @@ public class PhotoService {
         //获取项目绝对路径
        // String realPath = request.getSession().getServletContext().getRealPath("upload/");
         //获取图片文件名称
-        String fileName = System.currentTimeMillis()+file.getOriginalFilename();
-        photeUrl = photeUrl+fileName;
+        String suffix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1);
+
+        String fileName = System.currentTimeMillis()+"."+suffix;
+        String newPhoteUrl = photeUrl+fileName;
         if (!file.isEmpty()) {
             try {
                 uploadFile(file.getBytes(),photoPath,fileName);
@@ -56,29 +58,12 @@ public class PhotoService {
         String url = mRequest.getParameter("url");
         String photoMessage = mRequest.getParameter("photoMessage");
 
-        Photo photo = new Photo();
-        photo.setPhotoUrl(photeUrl);
-        photo.setUrl(url);
-        photo.setPhotoMessage(photoMessage);
+        //图片上传成功后,将图片地址回传给前端
+        map.put("state", "200");
+        map.put("message", "图片上传成功");
+        map.put("photoUrl",newPhoteUrl);
+        return map;
 
-
-        Photo result = null;
-        try {
-            result = photoDao.save(photo);
-        } catch (Exception e) {
-            map.put("state","500");
-            map.put("message",e.getMessage());
-            return map;
-        }
-        if (result == null) {
-            map.put("state","500");
-            map.put("message","数据库返回结果为空");
-            return map;
-        } else {
-            map.put("state", "200");
-            map.put("message", "图片上传成功");
-            return map;
-        }
     }
 
     public  void uploadFile(byte[] file, String filePath, String fileName) throws IOException {
@@ -125,6 +110,27 @@ public class PhotoService {
         }else {
             map.put("state", "200");
             map.put("message", "数据更新成功");
+            return map;
+        }
+    }
+
+
+    public Map<String,String> save(Photo photo) {
+        HashMap<String, String> map = new HashMap<>();
+        try {
+            photo = photoDao.save(photo);
+        } catch (Exception e) {
+            map.put("state","500");
+            map.put("message",e.getMessage());
+            return map;
+        }
+        if (photo == null){
+            map.put("state","500");
+            map.put("message","数据库返回结果为空");
+            return map;
+        }else {
+            map.put("state", "200");
+            map.put("message", "数据保存成功");
             return map;
         }
     }

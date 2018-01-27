@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class TrainSubject {
+public class Lectuer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -22,6 +22,11 @@ public class PhotoWeb {
         return photoService.upload(request);
     }
 
+    @PostMapping("photo-save")
+    public Map<String, String> save(Photo photo){
+        return photoService.save(photo);
+    }
+
     @GetMapping("photo-findAll")
     public List<Photo> findAll(){
         return photoService.findAll();

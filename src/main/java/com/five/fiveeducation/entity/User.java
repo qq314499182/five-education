@@ -6,23 +6,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class TrainSubject {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String  msg;
+    private String userName;
 
-    private Integer isSee;
-
-    public Integer getIsSee() {
-        return isSee;
-    }
-
-    public void setIsSee(Integer isSee) {
-        this.isSee = isSee;
-    }
+    private String password;
 
     public Long getId() {
         return id;
@@ -32,11 +24,19 @@ public class TrainSubject {
         this.id = id;
     }
 
-    public String getMsg() {
-        return msg;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

@@ -130,28 +130,28 @@ public class Education {
     /**
      * 报名数
      */
-    private Integer enrollCount = 0;
+    private Long enrollCount = 0L;
 
 
     /**
      * 点击外部连接数
      */
-    private Integer clickCount = 0;
+    private Long clickCount = 0L;
 
 
-    public Integer getEnrollCount() {
+    public Long getEnrollCount() {
         return enrollCount;
     }
 
-    public void setEnrollCount(Integer enrollCount) {
+    public void setEnrollCount(Long enrollCount) {
         this.enrollCount = enrollCount;
     }
 
-    public Integer getClickCount() {
+    public Long getClickCount() {
         return clickCount;
     }
 
-    public void setClickCount(Integer clickCount) {
+    public void setClickCount(Long clickCount) {
         this.clickCount = clickCount;
     }
 

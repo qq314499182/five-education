@@ -20,7 +20,33 @@ public class Manage {
     /**
      * 列表总计
      */
-    private Long listCount ;
+    private Long listCount = 0L;
+
+    /**
+     *  累计报名数
+     */
+    private Long enrollCount = 0L;
+
+    /**
+     * 累计跳转链接数
+     */
+    private Long clickCount = 0L;
+
+    public Long getEnrollCount() {
+        return enrollCount;
+    }
+
+    public void setEnrollCount(Long enrollCount) {
+        this.enrollCount = enrollCount;
+    }
+
+    public Long getClickCount() {
+        return clickCount;
+    }
+
+    public void setClickCount(Long clickCount) {
+        this.clickCount = clickCount;
+    }
 
     public Long getId() {
         return id;

@@ -15,13 +15,14 @@ public class ManageWeb {
     @Autowired
     private ManageService manageService;
 
-    @GetMapping("manage-findAll")
+    @GetMapping("manage-find")
     public Manage findAll(){
         return manageService.findAll();
     }
 
-    @PostMapping("manage-update")
-    public Map<String,String> update(Manage manage){
-        return manageService.update(manage);
+    @PostMapping("manage-save")
+    public Map<String,String> save(Manage manage){
+        return manageService.save(manage);
     }
+
 }

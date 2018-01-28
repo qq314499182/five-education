@@ -72,6 +72,21 @@ public class EducationSearch {
      */
     private List<String> lectuer;
 
+    /**
+     * 查询状态 :
+     *      0 为列表
+     *      1 为查询
+     */
+    private Integer status;
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
     public String getTrainTypeLike() {
         return trainTypeLike;
     }

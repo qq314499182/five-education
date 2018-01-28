@@ -2,6 +2,7 @@ package com.five.fiveeducation.service;
 
 import com.five.fiveeducation.dao.TrainSubjectDao;
 import com.five.fiveeducation.entity.TrainSubject;
+import com.querydsl.core.types.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,16 +14,16 @@ import java.util.Map;
 public class TrainSubjectService {
 
     @Autowired
-    private TrainSubjectDao trainSubjectMeunDao;
+    private TrainSubjectDao trainSubjectDao;
 
-    public List<TrainSubject> findAll() {
-        return trainSubjectMeunDao.findAll();
+    public List<TrainSubject> findAll(Predicate predicate) {
+        return (List<TrainSubject>) trainSubjectDao.findAll(predicate);
     }
 
     public Map<String,String> save(TrainSubject trainSubject) {
         Map<String,String> map = new HashMap<>();
         try {
-            TrainSubject save = trainSubjectMeunDao.save(trainSubject);
+            TrainSubject save = trainSubjectDao.save(trainSubject);
             if (save == null){
                 map.put("state","500");
                 map.put("message","保存失败,数据库返回结果null");
@@ -41,7 +42,7 @@ public class TrainSubjectService {
     public Map<String,String> update(TrainSubject trainSubject) {
         Map<String,String> map = new HashMap<>();
         try {
-            TrainSubject save = trainSubjectMeunDao.save(trainSubject);
+            TrainSubject save = trainSubjectDao.save(trainSubject);
             if (save == null){
                 map.put("state","500");
                 map.put("message","更新失败,数据库返回结果null");
@@ -60,7 +61,7 @@ public class TrainSubjectService {
     public Map<String,String> delete(TrainSubject trainSubject) {
         Map<String,String> map = new HashMap<>();
         try {
-            trainSubjectMeunDao.delete(trainSubject);
+            trainSubjectDao.delete(trainSubject);
         } catch (Exception e) {
             map.put("state","500");
             map.put("message",e.getMessage());

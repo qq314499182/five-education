@@ -79,7 +79,9 @@ public class EducationService {
         Predicate predicate = creatPredicate(education);
         Page<Education> all = educationDao.findAll(predicate, pageable);
         //统计累计搜索数
-        manageService.updateSearchCount();
+        if (education.getStatus() == 1 && pageable.getPageNumber() == 0){
+            manageService.updateSearchCount();
+        }
         return all;
     }
 
@@ -329,5 +331,13 @@ public class EducationService {
 
     public Long findCount() {
         return educationDao.count();
+    }
+
+    public Long countByEnrollCount() {
+        return educationDao.countByEnrollCount();
+    }
+
+    public Long countByClickCount() {
+        return educationDao.countByClickCount();
     }
 }

@@ -2,7 +2,7 @@ package com.five.fiveeducation.service;
 
 import com.five.fiveeducation.dao.LectuerDao;
 import com.five.fiveeducation.entity.Lectuer;
-import com.five.fiveeducation.entity.TrainSubject;
+import com.querydsl.core.types.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +16,8 @@ public class LectuerService {
     @Autowired
     private LectuerDao lectuerDao;
 
-    public List<Lectuer> findAll() {
-        return lectuerDao.findAll();
+    public List<Lectuer> findAll(Predicate predicate) {
+        return (List<Lectuer>) lectuerDao.findAll(predicate);
     }
 
     public Map<String,String> save(Lectuer lectuer) {

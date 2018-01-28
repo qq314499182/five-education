@@ -2,6 +2,7 @@ package com.five.fiveeducation.dao;
 
 import com.five.fiveeducation.entity.Lectuer;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 
-public interface LectuerDao extends JpaRepository<Lectuer,Long> {
+public interface LectuerDao extends JpaRepository<Lectuer,Long>,QueryDslPredicateExecutor<Lectuer> {
 }

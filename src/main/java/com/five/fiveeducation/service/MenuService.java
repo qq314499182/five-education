@@ -20,8 +20,8 @@ public class MenuService {
     public Menu findAll() {
         Menu menu = new Menu();
         menu.setTrainSubjects(trainSubjectMenuService.findAll());
-        menu.setLectuers(lectuerMenuService.findAll());
-        menu.setSponsors(sponsorMenuService.findAll());
+        //menu.setLectuers(lectuerMenuService.findAll());
+        //menu.setSponsors(sponsorMenuService.findAll());
        return menu;
     }
 }

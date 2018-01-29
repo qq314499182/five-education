@@ -1,6 +1,7 @@
 package com.five.fiveeducation.service;
 
 import com.five.fiveeducation.dao.SponsorDao;
+import com.five.fiveeducation.entity.Lectuer;
 import com.five.fiveeducation.entity.Sponsor;
 import com.querydsl.core.types.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,5 +76,7 @@ public class SponsorService {
     }
 
 
-
+    public List<Sponsor> findByMsg(String msg) {
+        return sponsorDao.findByMsg(msg);
+    }
 }

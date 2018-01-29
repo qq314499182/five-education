@@ -1,9 +1,7 @@
 package com.five.fiveeducation.service;
 
 import com.five.fiveeducation.dao.EducationDao;
-import com.five.fiveeducation.entity.Education;
-import com.five.fiveeducation.entity.EducationSearch;
-import com.five.fiveeducation.entity.QEducation;
+import com.five.fiveeducation.entity.*;
 import com.five.fiveeducation.utils.DateUtils;
 import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -11,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.beans.Transient;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -26,6 +26,12 @@ public class EducationService {
     @Autowired
     private ManageService manageService;
 
+    @Autowired
+    private LectuerService lectuerService;
+
+    @Autowired
+    private SponsorService sponsorService;
+
     private static Map<String, String> map = new HashMap<>();
 
     /**
@@ -34,6 +40,7 @@ public class EducationService {
      * @param education
      * @return Map<String, String>
      */
+    @Transactional(rollbackFor = RuntimeException.class)
     public Map<String, String> save(Education education) {
         //根据费用更新价格区间
         Education result = updatePriceInterval(education);
@@ -41,10 +48,18 @@ public class EducationService {
         result = updateDaysInterval(result);
         try {
             result = educationDao.saveAndFlush(result);
+            //同时将讲师信息保存到讲师信息表中,并进行重复性校验
+            String lectuerStates = saveLectuer(education);
+            if (!lectuerStates.equals("200")){
+                throw new RuntimeException("讲师信息同步失败");
+            }
+            //同时将培训机构信息保存到培训机构表中,并进行重复性校验
+            String sponsorStates = saveSponsor(education);
+            if (!sponsorStates.equals("200")){
+                throw new RuntimeException("培训机构信息同步失败");
+            }
         } catch (Exception e) {
-            map.put("state", "500");
-            map.put("message", e.getMessage());
-            return map;
+            throw new RuntimeException(e.getMessage());
         }
         if (result == null) {
             map.put("state", "500");
@@ -339,5 +354,53 @@ public class EducationService {
 
     public Long countByClickCount() {
         return educationDao.countByClickCount();
+    }
+
+    /**
+     * 校验讲师重复性,并进行保存
+     * @param education
+     * @return
+     */
+    public String saveLectuer(Education education){
+        try {
+            List<Lectuer> list = lectuerService.findByMsg(education.getLectuer().trim());
+            if (list == null && list.size() == 0){
+                Lectuer lectuer = new Lectuer();
+                lectuer.setMsg(education.getLectuer());
+                Map<String, String> save = lectuerService.save(lectuer);
+                if (save.get("state").equals("200")){
+                    return "OK";
+                }else {
+                    return "ERROR";
+                }
+            }
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
+        return null;
+    }
+
+    /**
+     * 校验培训机构重复性,并进行保存
+     * @param education
+     * @return
+     */
+    public String saveSponsor(Education education){
+        try {
+            List<Sponsor> list = sponsorService.findByMsg(education.getLectuer().trim());
+            if (list == null && list.size() == 0){
+                Sponsor sponsor = new Sponsor();
+                sponsor.setMsg(education.getSponsor());
+                Map<String, String> save = sponsorService.save(sponsor);
+                if (save.get("state").equals("200")){
+                    return "OK";
+                }else {
+                    return "ERROR";
+                }
+            }
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
+        return null;
     }
 }

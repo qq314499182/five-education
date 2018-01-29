@@ -71,4 +71,9 @@ public class LectuerService {
         map.put("message","数据删除成功");
         return map;
     }
+
+    public List<Lectuer> findByMsg(String msg) {
+       return lectuerDao.findByMsg(msg);
+
+    }
 }

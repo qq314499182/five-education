@@ -50,12 +50,12 @@ public class EducationService {
             result = educationDao.saveAndFlush(result);
             //同时将讲师信息保存到讲师信息表中,并进行重复性校验
             String lectuerStates = saveLectuer(education);
-            if (!lectuerStates.equals("200")){
+            if (!lectuerStates.equals("OK")){
                 throw new RuntimeException("讲师信息同步失败");
             }
             //同时将培训机构信息保存到培训机构表中,并进行重复性校验
             String sponsorStates = saveSponsor(education);
-            if (!sponsorStates.equals("200")){
+            if (!sponsorStates.equals("OK")){
                 throw new RuntimeException("培训机构信息同步失败");
             }
         } catch (Exception e) {
@@ -364,7 +364,7 @@ public class EducationService {
     public String saveLectuer(Education education){
         try {
             List<Lectuer> list = lectuerService.findByMsg(education.getLectuer().trim());
-            if (list == null && list.size() == 0){
+            if ( list.size() == 0){
                 Lectuer lectuer = new Lectuer();
                 lectuer.setMsg(education.getLectuer());
                 Map<String, String> save = lectuerService.save(lectuer);
@@ -388,7 +388,7 @@ public class EducationService {
     public String saveSponsor(Education education){
         try {
             List<Sponsor> list = sponsorService.findByMsg(education.getLectuer().trim());
-            if (list == null && list.size() == 0){
+            if ( list.size() == 0){
                 Sponsor sponsor = new Sponsor();
                 sponsor.setMsg(education.getSponsor());
                 Map<String, String> save = sponsorService.save(sponsor);

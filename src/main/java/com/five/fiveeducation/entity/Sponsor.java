@@ -14,7 +14,7 @@ public class Sponsor {
 
     private String  msg;
 
-    private Integer isSee;
+    private Integer isSee = 0;
 
     public Integer getIsSee() {
         return isSee;

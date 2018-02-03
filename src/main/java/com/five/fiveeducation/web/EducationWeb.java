@@ -58,4 +58,9 @@ public class EducationWeb {
         return educationService.updateClickCount(education);
     }
 
+    @GetMapping(value = "delete")
+    public Map<String,String> delete(Education education){
+        return educationService.delete(education);
+    }
+
 }

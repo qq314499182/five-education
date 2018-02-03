@@ -49,8 +49,12 @@ public class Education {
     /**
      * 培训内容链接
      */
-    @Size(max = 4000)
     private String url;
+
+    /**
+     * 报名内容链接
+     */
+    private String twoUrl;
 
     /**
      * 持续时间
@@ -138,6 +142,14 @@ public class Education {
      */
     private Long clickCount = 0L;
 
+
+    public String getTwoUrl() {
+        return twoUrl;
+    }
+
+    public void setTwoUrl(String twoUrl) {
+        this.twoUrl = twoUrl;
+    }
 
     public Long getEnrollCount() {
         return enrollCount;

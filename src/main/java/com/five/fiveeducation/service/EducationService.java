@@ -373,11 +373,12 @@ public class EducationService {
                 }else {
                     return "ERROR";
                 }
+            }else {
+                return "OK";
             }
         } catch (Exception e) {
             throw new RuntimeException();
         }
-        return null;
     }
 
     /**
@@ -397,10 +398,26 @@ public class EducationService {
                 }else {
                     return "ERROR";
                 }
+            }else {
+                return "OK";
             }
         } catch (Exception e) {
             throw new RuntimeException();
         }
-        return null;
+    }
+
+    public Map<String,String> delete(Education education) {
+        try {
+            if (education != null){
+                educationDao.delete(education);
+            }
+        } catch (Exception e) {
+            map.put("state","500");
+            map.put("message",e.getMessage());
+            return map;
+        }
+        map.put("state","200");
+        map.put("message","数据更新成功");
+        return map;
     }
 }
